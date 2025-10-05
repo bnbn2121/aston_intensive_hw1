@@ -1,4 +1,4 @@
-package model;
+package main;
 
 public class MyHashMap<K, V> {
     private int capacity;
@@ -57,7 +57,7 @@ public class MyHashMap<K, V> {
     }
 
     private void resize() {
-        int newCapacity = (int) (capacity * 1.5);
+        int newCapacity = capacity * 2;
         MyHashMap<K, V> resizedMyHashMap = new MyHashMap<>(newCapacity);
         for (Node<K, V> firstNodePerBucket : bucket) {
             Node<K, V> currentNode = firstNodePerBucket;
@@ -97,7 +97,7 @@ public class MyHashMap<K, V> {
     }
 
     private int calcIndexBucket(K key) {
-        int indexBucket = Math.abs(key.hashCode() % capacity);
+        int indexBucket = Math.abs(key.hashCode() % bucket.length);
         return indexBucket;
     }
 
