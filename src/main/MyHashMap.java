@@ -29,9 +29,21 @@ public class MyHashMap<K, V> {
         if (userCapacity <= 0) {
             throw new IllegalArgumentException();
         }
-        this.capacity = userCapacity;
+        this.capacity = roundToPowerOfTwo(userCapacity);
         this.realSize = 0;
         this.bucket = (Node<K, V>[]) new Node[capacity];
+    }
+
+    protected int roundToPowerOfTwo(int number) {
+        //пока сделал protected для возможности тестирования отдельно этого метода
+        if (number <= 1) {
+            return 1;
+        }
+        int roundedNumber = 1;
+        while (roundedNumber <= Integer.MAX_VALUE / 2 && roundedNumber < number) {
+            roundedNumber *= 2;
+        }
+        return roundedNumber;
     }
 
     public int size() {
@@ -53,11 +65,11 @@ public class MyHashMap<K, V> {
     }
 
     private boolean isNeedResize() {
-        return realSize >= capacity * DEFAULT_LOAD_FACTOR;
+        return realSize >= bucket.length * DEFAULT_LOAD_FACTOR;
     }
 
     private void resize() {
-        int newCapacity = capacity * 2;
+        int newCapacity = bucket.length * 2;
         MyHashMap<K, V> resizedMyHashMap = new MyHashMap<>(newCapacity);
         for (Node<K, V> firstNodePerBucket : bucket) {
             Node<K, V> currentNode = firstNodePerBucket;

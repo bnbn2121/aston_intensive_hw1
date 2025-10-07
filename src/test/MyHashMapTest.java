@@ -92,4 +92,34 @@ public class MyHashMapTest {
         }
     }
 
+    @Test
+    void testRoundToPowerOfTwo() {
+        class TestRoundToPowerOfTwoMyHashMap<K, V> extends MyHashMap<K,V>{
+            public int roundToPowerOfTwo(int number) {
+                return super.roundToPowerOfTwo(number);
+            }
+        }
+        TestRoundToPowerOfTwoMyHashMap map1 = new TestRoundToPowerOfTwoMyHashMap<>();
+
+        assertEquals(1, map1.roundToPowerOfTwo(-555));
+        System.out.println(map1.roundToPowerOfTwo(-555));
+        assertEquals(1, map1.roundToPowerOfTwo(0));
+        System.out.println(map1.roundToPowerOfTwo(0));
+        assertEquals(1, map1.roundToPowerOfTwo(1));
+        System.out.println(map1.roundToPowerOfTwo(1));
+        assertEquals(2, map1.roundToPowerOfTwo(2));
+        System.out.println(map1.roundToPowerOfTwo(2));
+        assertEquals(4, map1.roundToPowerOfTwo(3));
+        System.out.println(map1.roundToPowerOfTwo(3));
+        assertEquals(4, map1.roundToPowerOfTwo(4));
+        System.out.println(map1.roundToPowerOfTwo(4));
+        assertEquals(128, map1.roundToPowerOfTwo(125));
+        System.out.println(map1.roundToPowerOfTwo(125));
+        assertEquals(4096, map1.roundToPowerOfTwo(3453));
+        System.out.println(map1.roundToPowerOfTwo(3453));
+        assertEquals(1073741824, map1.roundToPowerOfTwo(2000000000));
+        System.out.println(map1.roundToPowerOfTwo(2000000000));
+        assertEquals(1073741824, map1.roundToPowerOfTwo(Integer.MAX_VALUE));
+        System.out.println(map1.roundToPowerOfTwo(Integer.MAX_VALUE));
+    }
 }
